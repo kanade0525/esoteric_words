@@ -11,6 +11,8 @@ ENV LD_PRELOAD=/opt/lib/libcrypteia.so
 RUN mkdir /app \
     && groupadd -g 10001 app \
     && useradd -u 10000 -g app app \
+		&& mkdir -p /app/tmp/cache /app/public/assets \
+    && chmod -R 777 /app/tmp/cache /app/public/assets \
     && chown -R app:app /app
 USER app
 WORKDIR "/app"
@@ -21,4 +23,6 @@ ENV BUNDLE_PATH=./vendor/bundle
 ENV BUNDLE_CACHE_PATH=./vendor/cache
 ENV RAILS_SERVE_STATIC_FILES=1
 COPY . .
+RUN bundle exec rails assets:precompile RAILS_ENV=production
+
 CMD ["config/environment.Lamby.cmd"]
