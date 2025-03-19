@@ -10,6 +10,7 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "jbuilder"
+gem "rack"
 
 group :development, :test do
   gem "debug"
@@ -18,6 +19,7 @@ end
 
 group :development do
   gem "web-console"
+	# TODO: gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
 end
 
 group :test do

@@ -251,6 +251,7 @@ DEPENDENCIES
   lamby
   lograge
   mysql2 (~> 0.5)
+  rack
   rails
   selenium-webdriver
   sprockets-rails
