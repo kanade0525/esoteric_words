@@ -40,4 +40,4 @@
 !.env.development
 !.env.test
 /vendor/bundle
-.ruby-version
+# .ruby-version
