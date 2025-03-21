@@ -93,10 +93,14 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diffy (3.4.3)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hpricot (0.8.6)
+    html2slim-ruby3 (0.2.1)
+      hpricot
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -197,12 +201,23 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     rexml (3.3.9)
+    ridgepole (3.0.1)
+      activerecord (>= 6.1, < 8.1)
+      diffy
+      logger
     rubyzip (2.3.2)
     securerandom (0.3.1)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.7.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -213,7 +228,9 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.1)
+    temple (0.10.3)
     thor (1.3.2)
+    tilt (2.6.0)
     timeout (0.4.1)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
@@ -246,6 +263,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   debug
+  html2slim-ruby3
   importmap-rails
   jbuilder
   lamby
@@ -253,7 +271,9 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   rack
   rails
+  ridgepole
   selenium-webdriver
+  slim-rails
   sprockets-rails
   stimulus-rails
   turbo-rails

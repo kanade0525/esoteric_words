@@ -11,6 +11,9 @@ gem "stimulus-rails"
 gem "turbo-rails"
 gem "jbuilder"
 gem "rack"
+gem 'ridgepole'
+gem 'slim-rails'
+gem 'html2slim-ruby3'
 
 group :development, :test do
   gem "debug"
