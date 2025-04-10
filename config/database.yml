@@ -8,14 +8,15 @@ default: &default
 
 development:
   <<: *default
-  database: esoteric-word-development
+  database: esoteric_word_development
 
 test:
   <<: *default
-  database: esoteric-word-test
+  database: esoteric_word_test
 
 production:
   <<: *default
+  database: esoteric_word_production
   url: <%= ENV["DATABASE_URL"] %>
   username: <%= ENV["MYSQL_ADMIN_USER"] %>
   password: <%= ENV["MYSQL_ADMIN_PASSWORD"] %>
