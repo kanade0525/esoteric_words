@@ -22,7 +22,16 @@ Globals:
     Environment:
       Variables:
         RAILS_ENV: !Ref RailsEnv
+        MYSQL_HOST: !Sub '{{resolve:ssm:/esoteric/MYSQL_HOST}}'
+        MYSQL_ADMIN_USER: !Sub '{{resolve:ssm:/esoteric/MYSQL_ADMIN_USER}}'
+        MYSQL_ADMIN_PASSWORD: !Sub '{{resolve:ssm:/esoteric/MYSQL_ADMIN_PASSWORD}}'
     Timeout: 30
+    VpcConfig:
+      SubnetIds:
+        - subnet-01d44ba6f820874c1
+        - subnet-061629097c94acf1d
+      SecurityGroupIds:
+        - sg-089f63e89c39b13c4
 
 Resources:
 
@@ -37,6 +46,15 @@ Resources:
         AuthType: NONE
       MemorySize: 1792
       PackageType: Image
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - Statement:
+            - Effect: Allow
+              Action:
+                - ssm:Get*
+                - ssm:Describe*
+              Resource:
+                - !Sub arn:aws:ssm:*:${AWS::AccountId}:parameter/esoteric/*
 
 Outputs:
 
