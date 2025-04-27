@@ -14,6 +14,8 @@ gem "rack"
 gem 'ridgepole'
 gem 'slim-rails'
 gem 'html2slim-ruby3'
+gem 'bootstrap', '~> 5.3.0'
+gem 'sassc-rails'
 
 group :development, :test do
   gem "debug"
