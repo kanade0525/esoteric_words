@@ -1,0 +1,5 @@
+= simple_form_for [:admins, @question] do |f|
+  = f.input :content, label: '難解な単語'
+  .mt-3
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'キャンセル', admins_questions_path, class: 'btn btn-outline-secondary ms-2' 

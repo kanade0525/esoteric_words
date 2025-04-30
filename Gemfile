@@ -16,6 +16,7 @@ gem 'slim-rails'
 gem 'html2slim-ruby3'
 gem 'bootstrap', '~> 5.3.0'
 gem 'sassc-rails'
+gem 'simple_form'
 
 group :development, :test do
   gem "debug"
