@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      question: 難解な単語
+    attributes:
+      question:
+        content: 単語
+        created_at: 作成日時
+        updated_at: 更新日時
+  common:
+    list: 一覧 

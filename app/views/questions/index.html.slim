@@ -1,11 +1,11 @@
 .container.mt-4
   .d-flex.justify-content-between.align-items-center.mb-4
-    h1 難解な単語一覧
+    h1 = t('.title', model: t('activerecord.models.question'), list: t('common.list'))
   table.table.table-striped
     thead
       tr
-        th 単語
-        th 作成日時
+        th = t('activerecord.attributes.question.content')
+        th = t('activerecord.attributes.question.created_at')
     tbody
       - @questions.each do |question|
         tr

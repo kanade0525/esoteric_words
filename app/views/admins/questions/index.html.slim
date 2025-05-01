@@ -1,15 +1,15 @@
 .container.mt-4
   .d-flex.justify-content-between.align-items-center.mb-4
-    h1 難解な単語一覧
-    = link_to '新規作成', new_admins_question_path, class: 'btn btn-primary'
+    h1 = t('controllers.shared.index', model: t('activerecord.models.question'))
+    = link_to t('helpers.action.new', model: t('activerecord.models.question')), new_admins_question_path, class: 'btn btn-primary'
 
   table.table.table-striped
     thead
       tr
         th ID
-        th 単語
-        th 作成日時
-        th 操作
+        th = t('activerecord.attributes.question.content')
+        th = t('activerecord.attributes.question.created_at')
+        th = t('helpers.action.actions')
     tbody
       - @questions.each do |question|
         tr
@@ -17,5 +17,5 @@
           td = question.content
           td = question.try(:created_at)&.strftime('%Y/%m/%d %H:%M') || '-'
           td
-            = link_to '編集', edit_admins_question_path(question), class: 'btn btn-sm btn-outline-primary me-2'
-            = button_to '削除', admins_question_path(question), method: :delete, class: 'btn btn-sm btn-outline-danger'
+            = link_to t('helpers.action.edit'), edit_admins_question_path(question), class: 'btn btn-sm btn-outline-primary me-2'
+            = button_to t('helpers.action.destroy'), admins_question_path(question), method: :delete, class: 'btn btn-sm btn-outline-danger'
