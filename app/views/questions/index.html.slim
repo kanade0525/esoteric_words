@@ -1,1 +1,13 @@
-= @questions.pluck(:content)
+.container.mt-4
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1 難解な単語一覧
+  table.table.table-striped
+    thead
+      tr
+        th 単語
+        th 作成日時
+    tbody
+      - @questions.each do |question|
+        tr
+          td = question.content
+          td = question.try(:created_at)&.strftime('%Y/%m/%d %H:%M') || '-'
