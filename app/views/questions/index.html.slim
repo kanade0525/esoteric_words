@@ -1,6 +1,6 @@
 .container.mt-4
   .d-flex.justify-content-between.align-items-center.mb-4
-    h1 = t('.title', model: t('activerecord.models.question'), list: t('common.list'))
+    h1 = t('controllers.shared.index', model: t('activerecord.models.question'))
   table.table.table-striped
     thead
       tr

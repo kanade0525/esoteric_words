@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      question: 難解な単語
+      question: 問題
     attributes:
       question:
         content: 単語
