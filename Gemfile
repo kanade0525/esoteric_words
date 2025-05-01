@@ -25,7 +25,7 @@ end
 
 group :development do
   gem "web-console"
-	# TODO: gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
+	gem 'rubocop-rails-omakase', require: false
 end
 
 group :test do
