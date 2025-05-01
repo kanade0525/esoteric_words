@@ -1,6 +1,6 @@
 module Admins
   class QuestionsController < ApplicationController
-    before_action :set_question, only: [:edit, :update, :destroy]
+    before_action :set_question, only: [ :edit, :update, :destroy ]
 
     def index
       @questions = Question.all
@@ -13,7 +13,7 @@ module Admins
     def create
       @question = Question.new(question_params)
       if @question.save
-        redirect_to admins_questions_path, notice: '難解な単語が作成されました。'
+        redirect_to admins_questions_path, notice: "難解な単語が作成されました。"
       else
         render :new
       end
@@ -24,7 +24,7 @@ module Admins
 
     def update
       if @question.update(question_params)
-        redirect_to admins_questions_path, notice: '難解な単語が更新されました。'
+        redirect_to admins_questions_path, notice: "難解な単語が更新されました。"
       else
         render :edit
       end
@@ -32,7 +32,7 @@ module Admins
 
     def destroy
       @question.destroy
-      redirect_to admins_questions_path, notice: '難解な単語が削除されました。'
+      redirect_to admins_questions_path, notice: "難解な単語が削除されました。"
     end
 
     private
@@ -45,4 +45,4 @@ module Admins
       params.require(:question).permit(:content)
     end
   end
-end 
+end

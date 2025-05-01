@@ -11,12 +11,12 @@ gem "stimulus-rails"
 gem "turbo-rails"
 gem "jbuilder"
 gem "rack"
-gem 'ridgepole'
-gem 'slim-rails'
-gem 'html2slim-ruby3'
-gem 'bootstrap', '~> 5.3.0'
-gem 'sassc-rails'
-gem 'simple_form'
+gem "ridgepole"
+gem "slim-rails"
+gem "html2slim-ruby3"
+gem "bootstrap", "~> 5.3.0"
+gem "sassc-rails"
+gem "simple_form"
 
 group :development, :test do
   gem "debug"
@@ -25,7 +25,7 @@ end
 
 group :development do
   gem "web-console"
-	gem 'rubocop-rails-omakase', require: false
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :test do
@@ -35,5 +35,5 @@ group :test do
 end
 
 group :production do
-  gem 'lograge'
+  gem "lograge"
 end
