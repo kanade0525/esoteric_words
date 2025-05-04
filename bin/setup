@@ -4,6 +4,9 @@ set -e
 echo '== Installing dependencies =='
 bundle install
 
+echo '== Running rubocop =='
+bundle exec rubocop -A
+
 echo "== Preparing database =="
 ./bin/rails db:prepare
 bundle exec ridgepole --config config/database.yml --env development --file db/schemas/Schemafile --apply

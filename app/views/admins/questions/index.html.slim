@@ -1,13 +1,21 @@
 .container.mt-4
   .d-flex.justify-content-between.align-items-center.mb-4
     h1 = t('controllers.shared.index', model: t('activerecord.models.question'))
+    = link_to t('helpers.action.new', model: t('activerecord.models.question')), new_admins_question_path, class: 'btn btn-primary'
+
   table.table.table-striped
     thead
       tr
+        th ID
         th = t('activerecord.attributes.question.content')
         th = t('activerecord.attributes.question.created_at')
+        th
     tbody
       - @questions.each do |question|
         tr
+          td = question.id
           td = question.content
           td = question.try(:created_at)&.strftime('%Y/%m/%d %H:%M') || '-'
+          td
+            = link_to t('helpers.action.edit'), edit_admins_question_path(question), class: 'btn btn-sm btn-outline-primary me-2'
+            = button_to t('helpers.action.destroy'), admins_question_path(question), method: :delete, class: 'btn btn-sm btn-outline-danger'
