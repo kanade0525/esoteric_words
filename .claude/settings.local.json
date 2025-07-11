@@ -4,7 +4,12 @@
       "Bash(bundle install:*)",
       "Bash(rbenv exec bundle:*)",
       "Bash(ruby --version)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(bundle exec rubocop:*)",
+      "WebFetch(domain:qiita.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:lamby.cloud)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }

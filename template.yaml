@@ -22,16 +22,9 @@ Globals:
     Environment:
       Variables:
         RAILS_ENV: !Ref RailsEnv
-        MYSQL_HOST: !Sub '{{resolve:ssm:/esoteric/MYSQL_HOST}}'
-        MYSQL_ADMIN_USER: !Sub '{{resolve:ssm:/esoteric/MYSQL_ADMIN_USER}}'
-        MYSQL_ADMIN_PASSWORD: !Sub '{{resolve:ssm:/esoteric/MYSQL_ADMIN_PASSWORD}}'
+        QUESTIONS_TABLE_NAME: !Sub 'questions_${RailsEnv}'
+        AWS_REGION: !Ref AWS::Region
     Timeout: 30
-    VpcConfig:
-      SubnetIds:
-        - subnet-01d44ba6f820874c1
-        - subnet-061629097c94acf1d
-      SecurityGroupIds:
-        - sg-089f63e89c39b13c4
 
 Resources:
 
@@ -47,14 +40,20 @@ Resources:
       MemorySize: 1792
       PackageType: Image
       Policies:
-        - AWSLambdaVPCAccessExecutionRole
+        - AWSLambdaBasicExecutionRole
         - Statement:
             - Effect: Allow
               Action:
-                - ssm:Get*
-                - ssm:Describe*
+                - dynamodb:PutItem
+                - dynamodb:GetItem
+                - dynamodb:UpdateItem
+                - dynamodb:DeleteItem
+                - dynamodb:Query
+                - dynamodb:Scan
+                - dynamodb:DescribeTable
               Resource:
-                - !Sub arn:aws:ssm:*:${AWS::AccountId}:parameter/esoteric/*
+                - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/questions_${RailsEnv}
+                - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/questions_${RailsEnv}/index/*
 
 Outputs:
 

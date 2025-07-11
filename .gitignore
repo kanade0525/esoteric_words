@@ -23,11 +23,12 @@
 !/tmp/pids/.keep
 
 # Ignore storage (uploaded files in development and any SQLite databases).
-/storage/*
-!/storage/.keep
-/tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
+# Removed - ActiveStorage is not used with DynamoDB
+# /storage/*
+# !/storage/.keep
+# /tmp/storage/*
+# !/tmp/storage/
+# !/tmp/storage/.keep
 
 /public/assets
 
