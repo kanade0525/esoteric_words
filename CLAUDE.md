@@ -11,8 +11,18 @@ EsotericWord（難解な単語）は、Lambyフレームワークを使用して
 - **バックエンド**: Ruby 3.2, Rails 7.2
 - **データベース**: MySQL 8.x（ブランチ名から現在DynamoDBへの移行作業中）
 - **フロントエンド**: Slimテンプレート、Bootstrap 5.3、Stimulus.js、Turbo Rails
-- **デプロイメント**: Lamby経由でAWS Lambda、Dockerでコンテナ化
+- **デプロイメント**: [Lamby](https://lamby.cloud/)経由でAWS Lambda、Dockerでコンテナ化
 - **インフラ**: AWS SAM
+
+### 重要な依存関係
+- **[Lamby](https://lamby.cloud/)**: RailsアプリケーションをAWS Lambdaで実行するためのアダプター
+  - Dockerfileで設定: `CMD ["config/environment.Lamby.cmd"]` (28行目)
+  - バージョン: 6.0.1 (Gemfileで確認可能)
+  - 公式ドキュメント: https://lamby.cloud/
+- **[Crypteia](https://github.com/rails-lambda/crypteia-extension)**: 環境変数をAWS SSMから安全に取得
+  - Dockerfileで設定: `COPY --from=ghcr.io/rails-lambda/crypteia-extension-debian:1 /opt /opt` (6行目)
+- **[Ridgepole](https://github.com/ridgepole/ridgepole)**: データベーススキーマをRuby DSLで管理
+  - スキーマファイル: `db/schemas/` ディレクトリ
 
 ## 必須コマンド
 
@@ -99,3 +109,13 @@ Bootstrap 5統合のsimple_form gemを使用。フォームは自動的にBootst
 - 既存のQuestionモデル構造を考慮する
 - 既存のコントローラーとビューとの互換性を維持する
 - RidgepoleはMySQL専用のため、スキーマ管理アプローチを更新する
+
+## 重要な開発ルール
+
+### 技術選定や推奨事項について回答する際は必ず公式ドキュメントを確認すること
+- **Lamby関連**: https://lamby.cloud/docs を必ず参照
+  - DynamoDB使用時は[Lamby公式推奨のAws::Record](https://lamby.cloud/docs/database)を使用
+- **AWS関連**: AWS公式ドキュメントを参照
+- **Rails関連**: Rails Guidesを参照
+
+推測や一般的な知識だけで答えず、必ず一次情報源を確認してから回答すること。
