@@ -1,9 +1,19 @@
 require "aws-sdk-dynamodb"
 
-# AWS SDK設定をconfig/aws.ymlから読み込む
-Aws.config.update(
-  Rails.application.config_for(:aws).deep_symbolize_keys
-)
+if Rails.env.development? || Rails.env.test?
+  # Development/Test環境ではDynamoDB Localを使用
+  Aws.config.update(
+    region: "ap-northeast-1",
+    endpoint: ENV["DYNAMODB_ENDPOINT"] || "http://localhost:8000",
+    access_key_id: "dummy",
+    secret_access_key: "dummy"
+  )
+else
+  # Production環境ではIAMロールを使用
+  Aws.config.update(
+    region: ENV["AWS_REGION"] || "ap-northeast-1"
+  )
+end
 
 # DynamoDBテーブルの作成（開発環境のみ）
 if Rails.env.development? || Rails.env.test?

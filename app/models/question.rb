@@ -56,20 +56,42 @@ class Question
   public
 
   def save
-    # 新規レコードの場合はIDを生成
-    self.id ||= SecureRandom.uuid
-    set_timestamps
-    super
+    save!
+    true
   rescue => e
     Rails.logger.error "Failed to save Question: #{e.message}"
     false
   end
 
   def save!
+    set_timestamps
     # 新規レコードの場合はIDを生成
     self.id ||= SecureRandom.uuid
-    set_timestamps
-    super
+    
+    # DynamoDBに直接保存
+    dynamodb_client = Aws::DynamoDB::Client.new(
+      region: ENV['AWS_REGION'] || 'ap-northeast-1',
+      endpoint: ENV['DYNAMODB_ENDPOINT'] || 'http://localhost:8000',
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'] || 'dummy',
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] || 'dummy'
+    )
+    
+    # Aws::Recordの形式でアイテムを準備
+    item = {
+      'id' => self.id,
+      'content' => self.content,
+      'created_at' => self.created_at&.iso8601,
+      'updated_at' => self.updated_at&.iso8601
+    }
+    
+    dynamodb_client.put_item(
+      table_name: self.class.table_name,
+      item: item
+    )
+    self
+  rescue => e
+    Rails.logger.error "Failed to save Question: #{e.message}"
+    raise e
   end
 
   def update(attributes)
@@ -84,17 +106,16 @@ class Question
 
   def destroy
     delete!
-  rescue => e
-    Rails.logger.error "Failed to destroy Question: #{e.message}"
-    false
   end
 
+  public
+
   def persisted?
-    !id.nil?
+    !id.nil? && !new_record?
   end
 
   def new_record?
-    !persisted?
+    id.nil?
   end
 
   # Railsフォームヘルパー用のmodel_nameメソッド
