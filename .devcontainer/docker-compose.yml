@@ -4,18 +4,17 @@ services:
     command: sleep infinity
     privileged: true
     environment:
-      - DYNAMODB_ENDPOINT=http://dynamodb:8000
-      - AWS_REGION=ap-northeast-1
-      - AWS_ACCESS_KEY_ID=dummy
-      - AWS_SECRET_ACCESS_KEY=dummy
+      - MYSQL_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=root
     depends_on:
-      - dynamodb
-  dynamodb:
-    image: amazon/dynamodb-local:latest
+      mysql: { condition: service_healthy }
+  mysql:
+    image: mysql:8.0
     restart: unless-stopped
-    ports:
-      - "8000:8000"
-    command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
-    volumes: ["data-dynamodb:/data"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes: ["data-mysql:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD", "mysql", "-h", "127.0.0.1", "-u", "root", "-proot"]
 volumes:
-  data-dynamodb:
+  data-mysql:

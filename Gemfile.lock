@@ -74,22 +74,6 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
-    aws-eventstream (1.4.0)
-    aws-partitions (1.1126.0)
-    aws-record (2.14.0)
-      aws-sdk-dynamodb (~> 1, >= 1.85.0)
-    aws-sdk-core (3.226.2)
-      aws-eventstream (~> 1, >= 1.3.0)
-      aws-partitions (~> 1, >= 1.992.0)
-      aws-sigv4 (~> 1.9)
-      base64
-      jmespath (~> 1, >= 1.6.1)
-      logger
-    aws-sdk-dynamodb (1.146.0)
-      aws-sdk-core (~> 3, >= 3.225.0)
-      aws-sigv4 (~> 1.5)
-    aws-sigv4 (1.12.1)
-      aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
@@ -112,6 +96,7 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diffy (3.4.3)
     drb (2.2.1)
     erubi (1.13.0)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -134,7 +119,6 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jmespath (1.6.2)
     json (2.11.3)
     lambda-console-ruby (1.0.0)
     lamby (6.0.1)
@@ -160,6 +144,7 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
+    mysql2 (0.5.6)
     net-imap (0.5.0)
       date
       net-protocol
@@ -231,6 +216,10 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     rexml (3.3.9)
+    ridgepole (3.0.1)
+      activerecord (>= 6.1, < 8.1)
+      diffy
+      logger
     rubocop (1.75.4)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -330,8 +319,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aws-record (~> 2.0)
-  aws-sdk-dynamodb
   bootstrap (~> 5.3.0)
   capybara
   debug
@@ -340,8 +327,10 @@ DEPENDENCIES
   jbuilder
   lamby
   lograge
+  mysql2 (~> 0.5)
   rack
   rails
+  ridgepole
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver

@@ -39,9 +39,6 @@ module Admins
 
     def set_question
       @question = Question.find(params[:id])
-    rescue => e
-      Rails.logger.error "Failed to find Question: #{e.message}"
-      redirect_to admins_questions_path, alert: "難解な単語が見つかりませんでした。"
     end
 
     def question_params

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all.sort_by(&:id)
+    @questions = Question.order(:id)
   end
 end
