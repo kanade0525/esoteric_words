@@ -1,5 +1,7 @@
-= simple_form_for [:admins, @question] do |f|
-  = f.input :content, label: t('activerecord.attributes.question.content')
+= form_with model: [:admins, @question], local: true do |f|
+  .mb-3
+    = f.label :content, t('activerecord.attributes.question.content'), class: 'form-label'
+    = f.text_field :content, class: 'form-control'
   .mt-3
-    = f.submit t('helpers.submit.create'), class: 'btn btn-primary'
+    = f.submit class: 'btn btn-primary'
     = link_to t('helpers.action.back_to_list'), admins_questions_path, class: 'btn btn-outline-secondary ms-2' 
