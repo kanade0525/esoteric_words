@@ -27,6 +27,18 @@ Globals:
 
 Resources:
 
+  QuestionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'esoteric_words_questions_${RailsEnv}'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
   RailsLambda:
     Type: AWS::Serverless::Function
     Metadata:
@@ -52,7 +64,7 @@ Resources:
                 - dynamodb:DeleteItem
                 - dynamodb:DescribeTable
               Resource:
-                - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/esoteric_words_questions_*'
+                - !GetAtt QuestionsTable.Arn
         - Statement:
             - Effect: Allow
               Action:
