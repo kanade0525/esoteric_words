@@ -38,7 +38,11 @@ module Admins
     private
 
     def set_question
-      @question = Question.find(params[:id])
+      @question = Question.find(id: params[:id])
+      if @question.nil?
+        redirect_to admins_questions_path, alert: "質問が見つかりません。"
+        nil
+      end
     end
 
     def question_params

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(./bin/setup)",
+      "Bash(ls:*)",
+      "Bash(rm:*)",
+      "WebFetch(domain:lamby.cloud)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.aws.amazon.com)",
+      "WebFetch(domain:aws.amazon.com)"
+    ],
+    "deny": []
+  }
+}
