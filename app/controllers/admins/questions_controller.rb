@@ -41,7 +41,7 @@ module Admins
       @question = Question.find(id: params[:id])
       if @question.nil?
         redirect_to admins_questions_path, alert: "質問が見つかりません。"
-        return
+        nil
       end
     end
 

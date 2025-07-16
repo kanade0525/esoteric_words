@@ -36,7 +36,7 @@ class Question
   # Rails統合用メソッド
   # persisted?はAws::Recordに既に実装されているので定義不要
   # 正しい実装: !(new_record? || destroyed?)
-  
+
   def to_param
     id
   end

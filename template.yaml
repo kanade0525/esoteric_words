@@ -22,7 +22,7 @@ Globals:
     Environment:
       Variables:
         RAILS_ENV: !Ref RailsEnv
-        AWS_REGION: ap-northeast-1
+        # AWS_REGION: ap-northeast-1
     Timeout: 30
 
 Resources:
